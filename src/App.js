@@ -48,6 +48,7 @@ class App extends React.Component{
   }
   handleChange= e=>{
     //console.log(e.length);
+    var {products1}=this.state;
    
     if(e!==null){
      var len= e.length;
@@ -56,21 +57,22 @@ class App extends React.Component{
     this.setState({selectedOption:e}||null);
     //If target value is null display all the products  
     if(e===null||len===0){
-      this.state.products =data.products;
+      this.setState({products :data.products});
     }
     //else display which one is selected
     else{
     return (
       
-      //Map the each Object value to the products1(Because "e" contains lable and value)
-      this.state.products1=(e.map( product=> (product.value))),
       
-      //Map the which one want to display and store it products
-      this.state.products=this.state.products1.map((x)=>
+      //Map the each Object value to the products1(Because "e" contains lable and value)
+      products1=(e.map( product=> (product.value))),
+      
+      //Map the which one want to display and store it products1
+      products1=products1.map((x)=>
       data.products.filter(product=>product.category.indexOf(x)!==-1)),
       //rearrage the item 
-      this.state.products.map(x=>x.map(y=>
-          this.state.products=this.state.products2.push(y
+      products1.map(x=>x.map(y=>
+         this.state.products2.push(y
     
       ))),
       this.setState({
