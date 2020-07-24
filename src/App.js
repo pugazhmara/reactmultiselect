@@ -47,29 +47,41 @@ class App extends React.Component{
     };
   }
   handleChange= e=>{
+    //console.log(e.length);
+    var {products1}=this.state;
+   
+    if(e!==null){
+     var len= e.length;
+    }
     //set the target the value to selectedOption
     this.setState({selectedOption:e}||null);
     //If target value is null display all the products  
-    if(e===null){
-      this.state.products =data.products;
+    if(e===null||len===0){
+      this.setState({products :data.products});
     }
     //else display which one is selected
     else{
     return (
+      
+      
       //Map the each Object value to the products1(Because "e" contains lable and value)
-      this.state.products1=(e.map( product=> (product.value))),
-      //Map the which one want to display and store it products
-      this.state.products=this.state.products1.map((x)=>
+      products1=(e.map( product=> (product.value))),
+      
+      //Map the which one want to display and store it products1
+      products1=products1.map((x)=>
       data.products.filter(product=>product.category.indexOf(x)!==-1)),
       //rearrage the item 
-      this.state.products.map(x=>x.map(y=>
-          this.state.products=this.state.products2.push(y
+      products1.map(x=>x.map(y=>
+         this.state.products2.push(y
     
       ))),
-      //copy the products2 properties to the products
-      this.state.products=this.state.products2,
-      //then to empty the products2 
-      this.state.products2=[]
+      this.setState({
+         //copy the products2 properties to the products
+         products:this.state.products2,
+         //then to empty the products2 
+         products2:[]
+      })
+     
       
       );
           }
@@ -86,8 +98,9 @@ class App extends React.Component{
            <div className="content">
            <div className="items" >
             MultiSelect:{"   "}
+  
             <Select  
-              closeMenuOnSelect={false}
+              //closeMenuOnSelect={false}
               components={animatedComponents}
               isMulti
               options={this.state.options}
@@ -96,7 +109,6 @@ class App extends React.Component{
               placeholder="select the products"
             />
             </div>
-
             <Products products={this.state.products}></Products>
            </div>
         </main>
